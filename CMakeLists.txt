@@ -3,16 +3,15 @@ cmake_minimum_required(VERSION 3.1)
 project(TestLib)
 
 set(TestLib_PUBLIC_HEADERS
-  "include/FileA.h"
-  "include/FileB.h"
+  "include/LibA/FileA.h"
+  "include/LibA/FileB.h"
+  "include/LibA/FileC.h"
   )
 
 set(TestLib_SOURCE_FILES
-  "include/FileA.cpp"
-  "include/FileB.cpp"
-
-  "include/FileC.h"
-  "include/FileC.cpp"
+  "src/FileA.cpp"
+  "src/FileB.cpp"
+  "src/FileC.cpp"
   )
 
 add_library(LibA
@@ -28,8 +27,8 @@ target_include_directories(LibA PUBLIC
 install(TARGETS LibA
   EXPORT LibAConfig
   PUBLIC_HEADER DESTINATION include/
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib/static
+  LIBRARY DESTINATION lib/LibA/
+  ARCHIVE DESTINATION lib/LibA/static
   )
 
 install(EXPORT LibAConfig
