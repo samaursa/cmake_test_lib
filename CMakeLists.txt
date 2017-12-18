@@ -19,6 +19,10 @@ add_library(LibA
   ${TestLib_SOURCE_FILES}
   )
 
+set_target_properties(LibA
+  PROPERTIES PUBLIC_HEADER "${TestLib_PUBLIC_HEADERS}" # need quotes, otherwise only first one is installed
+  )
+
 target_include_directories(LibA PUBLIC
       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
       $<INSTALL_INTERFACE:include>  # <prefix>/include/mylib
@@ -35,8 +39,6 @@ install(EXPORT LibAConfig
   NAMESPACE tl_
   DESTINATION cmake/
   )
-
-install(DIRECTORY include/ DESTINATION include/)
 
 export(TARGETS LibA FILE LibAConfig.cmake)
 export(PACKAGE LibA)
